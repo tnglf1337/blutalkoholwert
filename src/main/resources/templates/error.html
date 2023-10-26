@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blutalkoholwert-Rechner</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" th:href="@{main/resources/static/style.css}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="row">
+  <div class="col"></div>
+
+  <div class="col">
+    <div id="header">
+      <h1>Blutalkoholwert-Rechner</h1>
+    </div>
+
+    <form method="post" th:object="${personForm}">
+
+      <div class="mb-3">
+        <select class="form-select" aria-label="Default select example" name="alkoholart">
+          <option selected>Alkoholart</option>
+          <option value="bier">Bier (5 vol%) </option>
+          <option value="wein">Wein (12 vol%)</option>
+          <option value="korn">Korn (32 vol%)</option>
+          <option value="vodka">Vodka (40 vol%)</option>
+          <option value="whiskey">Whiskey (43 vol%)</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="menge" class="form-label">Einnahmemenge in ml:</label>
+        <input class="form-control" id="menge" placeholder="z.B. 500" name="menge">
+        <small th:if="${#fields.hasErrors('menge')}" th:errors="*{menge}">Menge Error</small>
+      </div>
+
+      <div class="mb-3">
+        <select class="form-select" aria-label="Default select example" name="geschlecht">
+          <option selected>Geschlecht</option>
+          <option value="m">männlich</option>
+          <option value="w">weiblich</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="weight" class="form-label">Körpergewicht in kg</label>
+        <input class="form-control" id="weight" placeholder="z.B. 95" name="weight">
+        <small th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}">Menge Error</small>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Berechne</button>
+    </form>
+
+    <p>Ihr Blutalkoholwert liegt bei ca. <span th:text="${promille}">0</span>‰</p>
+  </div>
+
+
+
+  <div class="col"></div>
+</div>
+</body>
+</html>
